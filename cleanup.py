@@ -8,7 +8,10 @@ def get_size(dir_path):
     for dirpath, dirnames, filenames in os.walk(dir_path):
         for f in filenames:
             fp = os.path.join(dirpath, f)
-            total_size += os.path.getsize(fp)
+            try:
+                total_size += os.path.getsize(fp)
+            except FileNotFoundError:
+                continue
     return total_size
 
 
@@ -23,4 +26,4 @@ def print_large_directories(start_path, size_in_mb, indent_level, max_depth):
 
 
 # Call the function with the directory path
-print_large_directories("M:/HK5/XL_THS", 300, 0,3)
+print_large_directories("/home/truongchu/.cache/huggingface/hub", 1000, 0,1)
